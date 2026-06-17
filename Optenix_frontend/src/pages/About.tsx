@@ -1,0 +1,417 @@
+import { Target, Award, Users, Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import { Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import api from "../api/axios";
+
+export default function About() {
+  // animation variants constants
+  const fadeUp: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const stagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  // Our core values data(fixed)
+  // fixed data
+  const values = [
+    {
+      icon: <Target className="w-8 h-8" />,
+      title: "Innovation for Impact",
+      description:
+        "We create products that change how students learn and how teams collaborate.",
+    },
+    {
+      icon: <Heart className="w-8 h-8" />,
+      title: "Ownership & Autonomy",
+      description:
+        "We believe in collective intelligence. Every team member has the freedom to suggest improvements and lead initiatives.",
+    },
+    {
+      icon: <Award className="w-8 h-8" />,
+      title: "Excellence in Service",
+      description:
+        "With a network covering 17,000+ pin codes, we pride ourselves on being reliable partners to our customers.",
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: "The Make in India Spirit",
+      description:
+        "We are proud contributors to the national vision of self-reliance in technology.",
+    },
+  ];
+
+  // stats data(fixed)
+  const stats = [
+    { number: "10K+", label: "Happy Clients" },
+    { number: "50+", label: "Upcoming Products" },
+    { number: "100+", label: "Products Launched" },
+  ];
+
+  // write now do data because dont have team member at this moment
+  // team member data(fixed)
+  // const team = [
+  //   {
+  //     name: "Sarah Johnson",
+  //     role: "CEO & Founder",
+  //     image:
+  //       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
+  //   },
+  //   {
+  //     name: "Michael Chen",
+  //     role: "CTO",
+  //     image:
+  //       "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+  //   },
+  //   {
+  //     name: "David Kim",
+  //     role: "Lead Developer",
+  //     image:
+  //       "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400",
+  //   },
+  // ];
+
+  // add testimonials (admin)
+  // backend part
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/testimonials").then((res) => setTestimonials(res.data));
+  }, []);
+
+  return (
+    <div className="min-h-screen">
+      {/* About page 1 */}
+      {/* About Optenix Tech Solutions */}
+      <motion.section
+        className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-20"
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+      >
+        <div className="container mx-auto px-6 text-center max-w-4xl ">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            About Opt
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              enix Tech Solutions
+            </span>
+          </h1>
+          <p className="text-xl text-black">
+            Optenix Tech Solutions is a Pune-based OEM and technology service
+            provider redefining how India learns and works through intelligent,
+            affordable, and future-ready digital solutions.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* About page 2 */}
+      {/* Our Story */}
+      <motion.section
+        className="py-14 bg-white"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-4xl  text-blue-700 font-bold mb-6">
+              Our Story
+            </h2>
+            <p className="text-black mb-4 text-lg">
+              Optenix Tech Solutions is a Pune-based hardware and technology
+              service provider specializing in digital classroom and corporate
+              conferencing solutions. As an OEM (Original Equipment
+              Manufacturer) of interactive displays and advanced AV equipment,
+              we design and deliver reliable, future-ready products for
+              educational institutions and enterprises.
+            </p>
+            <p className="text-black mb-4 text-lg">
+              We develop innovative digital tools and platforms that enhance
+              teaching, learning, and training experiences by integrating
+              cutting-edge technologies such as Artificial Intelligence, Virtual
+              Reality, and cloud-based systems into traditional education and
+              corporate learning environments.
+            </p>
+            <p className="text-black text-lg">
+              We believe in the power of technology to transform businesses and
+              improve lives. Every product we create is designed with this
+              vision in mind.
+            </p>
+          </div>
+
+          <motion.img
+            src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
+            className="rounded-2xl shadow-2xl"
+            whileHover={{ scale: 1.03 }}
+          />
+        </div>
+      </motion.section>
+
+      {/* About page 3 */}
+      {/* What We Do */}
+      <motion.section
+        className="py-20 bg-gradient-to-br from-gray-50 to-white"
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="container mx-auto px-6">
+          {/* Heading */}
+          <motion.div variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-blue-700 mb-3">
+              What We Do
+            </h2>
+            <p className="text-lg text-black">
+              Delivering intelligent, scalable, and future-ready technology
+              solutions.
+            </p>
+          </motion.div>
+
+          {/* Cards */}
+          <div className="grid md:grid-cols-3 gap-10">
+            {/* Card 1 */}
+            <motion.div
+              variants={fadeUp}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
+            >
+              <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                Interactive Hardware
+              </h3>
+              <p className="text-black mb-4 text-md">
+                Design and manufacture high-performance interactive devices for
+                modern classrooms and enterprises.
+              </p>
+              <ul className="text-black list-disc ml-5 space-y-2">
+                <li>4K / 8K Interactive Flat Panels</li>
+                <li>Digital Podiums & AI Cameras</li>
+                <li>Professional AV & Smart Displays</li>
+              </ul>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div
+              variants={fadeUp}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
+            >
+              <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                Digital Platforms
+              </h3>
+              <p className="text-black mb-4">
+                Build powerful cloud-based platforms that simplify learning and
+                institutional management.
+              </p>
+              <ul className="text-black list-disc ml-5 space-y-2">
+                <li>Learning Management Systems (LMS)</li>
+                <li>ERP & Admin Automation</li>
+                <li>Secure Cloud-Hosted Solutions</li>
+              </ul>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div
+              variants={fadeUp}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
+            >
+              <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                Integrated Solutions
+              </h3>
+              <p className="text-black mb-4">
+                Deliver end-to-end smart environments with seamless hardware and
+                software integration.
+              </p>
+              <ul className="text-black list-disc ml-5 space-y-2">
+                <li>Smart Classrooms & Hybrid Learning</li>
+                <li>Automated Conference Rooms</li>
+                <li>End-to-End Deployment & Support</li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About page 4 */}
+      {/* Stats*/}
+      <motion.section
+        className="py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div
+          className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center
+"
+        >
+          {stats.map((s, i) => (
+            <motion.div key={i} variants={fadeUp}>
+              <div className="text-5xl font-bold text-blue-600">{s.number}</div>
+              <p className="text-gray-600">{s.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* About page 5 */}
+      {/* Our Core Values*/}
+      <motion.section
+        className="py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-blue-700 mb-16">
+            Our Core Values
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            {values.map((v, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="bg-white p-8 rounded-xl shadow-lg text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                  {v.icon}
+                </div>
+                <h3 className="font-semibold text-xl mb-2">{v.title}</h3>
+                <p className="text-black">{v.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About page 6 */}
+      {/* Our Mission and impacts */}
+      <motion.section
+        className="py-20 bg-white"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* OUR MISSION */}
+            <motion.div variants={fadeUp}>
+              <h2 className="text-4xl font-bold text-blue-700 mb-6">
+                Our Mission
+              </h2>
+              <p className="text-black text-lg leading-relaxed mb-6">
+                Our mission is to empower educational institutions and
+                enterprises with intelligent, reliable, and future-ready
+                technology that transforms the way people learn, collaborate,
+                and grow.
+              </p>
+
+              <ul className="space-y-4 text-black">
+                <li className="flex items-start gap-3 text-lg">
+                  <span className="text-blue-600 text-xl">✓</span>
+                  Deliver innovative and scalable digital solutions
+                </li>
+                <li className="flex items-start gap-3 text-lg">
+                  <span className="text-blue-600 text-xl">✓</span>
+                  Bridge the gap between technology and real-world needs
+                </li>
+                <li className="flex items-start gap-3 text-lg">
+                  <span className="text-blue-600 text-xl">✓</span>
+                  Enable smarter, more connected environments
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* OUR IMPACT */}
+            <motion.div
+              variants={fadeUp}
+              className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 shadow-lg"
+            >
+              <h2 className="text-4xl font-bold text-blue-700 mb-8">
+                Our Impact
+              </h2>
+
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-3xl font-bold text-blue-600">500+</h3>
+                  <p className="text-black mt-2">Institutions Empowered</p>
+                </div>
+
+                <div>
+                  <h3 className="text-3xl font-bold text-blue-600">10K+</h3>
+                  <p className="text-black mt-2">Smart Devices Deployed</p>
+                </div>
+
+                <div>
+                  <h3 className="text-3xl font-bold text-blue-600">99%</h3>
+                  <p className="text-black mt-2">Customer Satisfaction</p>
+                </div>
+
+                <div>
+                  <h3 className="text-3xl font-bold text-blue-600">24/7</h3>
+                  <p className="text-black mt-2">Dedicated Support</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About page 7 */}
+      {/* What Our Clients Say */}
+      <motion.section
+        className="py-20 bg-gray-50"
+        initial="hidden"
+        variants={fadeUp}
+        whileInView="visible"
+        viewport={{once:true}}
+      >
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-blue-700 mb-12">
+            What Our Clients Say
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((t: any) => (
+              <div key={t._id} className="bg-white p-8 rounded-2xl shadow-lg">
+                <p className="text-gray-700 mb-4">"{t.message}"</p>
+                <h4 className="font-semibold">{t.name}</h4>
+                <p className="text-sm text-gray-500">{t.designation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About page 7 */}
+      {/* TEAM */}
+      {/* no data inside it */}
+      <motion.section
+        className="py-2 bg-white"
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      ></motion.section>
+    </div>
+  );
+}
